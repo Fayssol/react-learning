@@ -1,0 +1,84 @@
+4. Explication du Contexte Global (Fichier context.tsx)
+
+Voici le code du contexte :
+
+import React, { createContext, useContext, useState } from 'react';
+
+interface AppContextType {
+  user: string | null;
+  setUser: (user: string | null) => void;
+}
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<string | null>(null);
+
+  return (
+    <AppContext.Provider value={{ user, setUser }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export const useAppContext = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('useAppContext must be used within an AppProvider');
+  }
+  return context;
+};
+
+4.1. Décomposition du Contexte
+4.1.1. Création d'un contexte (createContext)
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+    createContext : Crée un conteneur pour partager des données dans l'application sans avoir besoin de "props drilling".
+    Type AppContextType : Définit deux propriétés :
+        user : La donnée partagée (ici, un utilisateur).
+        setUser : Fonction pour mettre à jour la donnée.
+
+4.1.2. Création du Provider
+
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<string | null>(null);
+
+  return (
+    <AppContext.Provider value={{ user, setUser }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+    AppProvider :
+        Définit un composant qui encapsule les autres composants enfants.
+        Permet de fournir les données (user et setUser) via le contexte.
+
+    useState :
+        Initialise user à null (aucun utilisateur connecté au départ).
+        Permet de mettre à jour l'état utilisateur avec setUser.
+
+4.1.3. Utilisation du Contexte (useContext)
+
+export const useAppContext = () => {
+  const context = useContext(AppContext);
+  if (!context) {
+    throw new Error('useAppContext must be used within an AppProvider');
+  }
+  return context;
+};
+
+    useAppContext :
+        Récupère les données du contexte (user et setUser).
+        Si useAppContext est utilisé hors du AppProvider, une erreur est levée.
+
+4.2. Résumé du Contexte
+
+    But : Partager des données globales (comme un utilisateur connecté) entre les composants.
+    Étapes :
+        Créer un contexte avec createContext.
+        Créer un Provider pour encapsuler les composants.
+        Utiliser le contexte avec useContext via une fonction utilitaire (useAppContext).
+
+Prochaine

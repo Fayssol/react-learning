@@ -1,0 +1,98 @@
+2. Fichier app-routes.tsx (Configuration des routes)
+
+Voici le code complet avant de le décomposer ligne par ligne :
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from '../pages/home-page';
+import AboutPage from '../pages/about-page';
+import NotFoundPage from '../pages/not-found-page';
+
+export default function AppRoutes() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Router>
+  );
+}
+
+Décomposition du code :
+2.1. Importation des dépendances
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from '../pages/home-page';
+import AboutPage from '../pages/about-page';
+import NotFoundPage from '../pages/not-found-page';
+
+    React :
+        Importe le framework React pour créer des composants.
+
+    BrowserRouter (renommé Router) :
+        Gère l'historique de navigation en mode HTML5 (navigateur moderne).
+        Nécessaire pour activer la navigation entre les différentes pages.
+
+    Routes et Route :
+        Routes : Conteneur pour toutes les routes de l'application.
+        Route : Définit un chemin URL spécifique et le composant qui doit être affiché.
+
+    Pages personnalisées :
+        HomePage : Page principale (chemin /).
+        AboutPage : Page "À propos" (chemin /about).
+        NotFoundPage : Page d'erreur pour les chemins inexistants (chemin *).
+
+2.2. Déclaration de la fonction principale :
+
+export default function AppRoutes() {
+
+    export default : Rend ce composant accessible depuis d'autres fichiers en l'important.
+    AppRoutes : Nom de la fonction qui configure les routes.
+
+2.3. Mise en place du Router
+
+<Router>
+  <Routes>
+    ...
+  </Routes>
+</Router>
+
+    Router :
+        Composant principal qui encapsule toutes les routes.
+        Assure la gestion des URL et permet de naviguer entre les pages sans recharger la page.
+
+    Routes :
+        Conteneur pour toutes les définitions de chemins (Route).
+
+2.4. Définition des Route :
+
+<Route path="/" element={<HomePage />} />
+<Route path="/about" element={<AboutPage />} />
+<Route path="*" element={<NotFoundPage />} />
+
+    Route 1 : path="/"
+        Correspond au chemin racine (http://localhost:3000/).
+        Affiche le composant HomePage.
+
+    Route 2 : path="/about"
+        Correspond au chemin /about (http://localhost:3000/about).
+        Affiche le composant AboutPage.
+
+    Route 3 : path="*"
+        Correspond à tous les chemins qui ne sont pas définis.
+        Utilisé pour afficher une page d'erreur personnalisée (NotFoundPage).
+
+2.5. Résumé de app-routes.tsx
+
+    But principal :
+    Configurer la navigation entre les différentes pages de l'application.
+
+    Étapes importantes :
+        Importer BrowserRouter, Routes, et Route depuis react-router-dom.
+        Créer une route pour chaque page, associée à un composant spécifique.
+        Ajouter une route de type path="*" pour gérer les chemins non définis.
+
+Pr

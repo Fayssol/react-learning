@@ -1,0 +1,120 @@
+Exemple dans le fichier index.tsx ou App.tsx :
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { AppProvider } from './context'; // Importation du contexte
+import AppRoutes from './app-routes';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <AppProvider>
+        <AppRoutes />
+      </AppProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+Explication :
+
+    Encapsulation avec AppProvider :
+        Le AppProvider englobe les routes (<AppRoutes />) et fournit un accès au contexte à toutes les pages.
+
+    Intégration avec BrowserRouter :
+        Permet de gérer la navigation dans l'application.
+
+Étape 2 : Utiliser le contexte dans une page
+
+Dans une page, vous pouvez utiliser le contexte grâce au hook useAppContext.
+Exemple dans home-page.tsx :
+
+import React from 'react';
+import { useAppContext } from './context';
+
+export default function HomePage() {
+  const { user, setUser } = useAppContext(); // Accès au contexte
+
+  const handleLogin = () => {
+    setUser('Isidore'); // Définir un utilisateur (simule une connexion)
+  };
+
+  const handleLogout = () => {
+    setUser(null); // Déconnexion
+  };
+
+  return (
+    <div>
+      <h1>Bienvenue sur la page d'accueil !</h1>
+      {user ? (
+        <>
+          <p>Bonjour, {user} !</p>
+          <button onClick={handleLogout}>Se déconnecter</button>
+        </>
+      ) : (
+        <>
+          <p>Vous n'êtes pas connecté.</p>
+          <button onClick={handleLogin}>Se connecter</button>
+        </>
+      )}
+    </div>
+  );
+}
+
+Décomposition de l'exemple :
+
+    useAppContext :
+        Permet d'accéder à deux éléments du contexte :
+            user : La donnée partagée (l'utilisateur connecté).
+            setUser : La fonction pour modifier cette donnée.
+
+    Simuler une connexion/déconnexion :
+        handleLogin : Définit un utilisateur fictif ("Isidore").
+        handleLogout : Réinitialise l'utilisateur à null.
+
+    Conditionnel JSX :
+        Si un utilisateur est connecté (user !== null), un message personnalisé et un bouton de déconnexion s'affichent.
+        Sinon, un message invitant à se connecter est affiché avec un bouton.
+
+Étape 3 : Exemple dans une autre page (about-page.tsx)
+
+Voici un autre exemple dans la page "À propos", pour afficher le nom de l'utilisateur connecté si disponible :
+
+import React from 'react';
+import { useAppContext } from './context';
+
+export default function AboutPage() {
+  const { user } = useAppContext(); // Accès à l'utilisateur depuis le contexte
+
+  return (
+    <div>
+      <h1>À propos</h1>
+      {user ? (
+        <p>Bienvenue, {user}. Voici des informations à propos de notre application.</p>
+      ) : (
+        <p>Connectez-vous pour en savoir plus sur cette application.</p>
+      )}
+    </div>
+  );
+}
+
+Explication :
+
+    Affichage conditionnel basé sur user :
+        Si un utilisateur est connecté, un message personnalisé est affiché.
+        Sinon, un message générique invitant à se connecter s'affiche.
+
+Résumé : Intégration du contexte dans une page
+
+    Encapsulez le Provider (AppProvider) autour de toutes vos routes.
+    Cela garantit que toutes les pages ont accès au contexte.
+
+    Utilisez useAppContext pour accéder au contexte dans une page.
+        Cela permet d'obtenir les valeurs définies dans le contexte.
+        Vous pouvez utiliser ou modifier les données globales (user, etc.).
+
+    Affichez ou utilisez ces données avec du JSX conditionnel.
+        Exemple : Affichez un message spécifique pour un utilisateur connecté ou non.
+
+Souhaites-tu te
