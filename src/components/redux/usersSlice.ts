@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/users";
+const API_URL = "https://optirh-server.onrender.com/api/v1";
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  const response = await axios.get(API_URL);
+  const response = await axios.get(`${API_URL}/departments/basic`);
   return response.data;
 });
 
@@ -25,8 +25,8 @@ export const deleteUser = createAsyncThunk("users/deleteUser", async (id: number
 
 type User = {
   id: number;
-  name: string;
-  email: string;
+  departmentName: string;
+  description: string;
 };
 
 type UsersState = {

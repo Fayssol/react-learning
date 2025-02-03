@@ -99,14 +99,14 @@ const UserList: React.FC = () => {
             <Table
               items={users}
               columnDefinitions={[
-                { id: "name", header: "Nom", cell: (item) => item.name },
-                { id: "email", header: "Email", cell: (item) => item.email },
+                { id: "departmentName", header: "departmentName", cell: (item) => item.departmentName },
+                { id: "description", header: "description", cell: (item) => item.description },
                 {
                   id: "actions",
                   header: "Actions",
                   cell: (item) => (
                     <>
-                      <Button onClick={() => setEditingUser(item)}>Modifier</Button>
+                      {/* <Button onClick={() => setEditingUser(item)}>Modifier</Button> */}
                       <Button onClick={() => dispatch(deleteUser(item.id))} variant="link">Supprimer</Button>
                     </>
                   ),
