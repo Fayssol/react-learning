@@ -22,7 +22,7 @@ export const Navigation = () => {
       { type: 'link', text: `Home`, href: `/home` },
       { type: 'link', text: `Transactions`, href: `/transactions` },
       { type: 'link', text: `About`, href: `/about` },
-      { type: 'link', text: `Users`, href: `/users` },
+      { type: 'link', text: `Departments`, href: `/departments` },
     ]}
   />
 }

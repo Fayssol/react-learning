@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../components/home/home";
 import About from "../components/about/about";
 import Transactions from "../components/transactions/Transactions";
-import UserList from "../components/redux/userList";
+import DepartmentList from "../components/redux/departmentList";
 
 export const AppRoutes = () => {
   return (
@@ -12,7 +12,7 @@ export const AppRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/transactions" element={<Transactions />} />
-        <Route path="/users" element={<UserList />} />
+        <Route path="/departments" element={<DepartmentList />} />
       </Routes>
     </BrowserRouter>
   );
